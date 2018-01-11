@@ -12,7 +12,7 @@ import Dashboard from './Dashboard';
 
 type FullProps = RouteComponentProps<{}>;
 
-class Full extends React.Component<FullProps, {}> {
+class Full extends React.Component<FullProps> {
   public render(): React.ReactNode {
     return (
       <div className="app">

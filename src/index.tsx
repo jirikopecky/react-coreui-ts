@@ -1,6 +1,8 @@
+import AuthenticationContext from 'adal-angular';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
+import adalConfig from './adalConfig';
+import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
 // tslint:disable:no-submodule-imports CSS Files
@@ -12,8 +14,16 @@ import 'simple-line-icons/css/simple-line-icons.css';
 import './scss/style.css';
 // tslint:enable:no-submodule-imports
 
-ReactDOM.render(
-    <App/>,
-    document.getElementById('root') as HTMLElement
-);
+const authContext = new AuthenticationContext(adalConfig);
+
+authContext.handleWindowCallback();
+
+if (window === window.parent) {
+    // this prevents double app render for the ADAL iFrame requests
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root') as HTMLElement
+    );
+}
+
 registerServiceWorker();

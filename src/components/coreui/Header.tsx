@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavbarBrand, NavbarToggler } from 'reactstrap';
+import { isUserLoggedIn } from '../../functions/adalFunctions';
 
 class Header extends React.Component {
   public render() {
@@ -15,8 +16,24 @@ class Header extends React.Component {
         <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
           <span className="navbar-toggler-icon" />
         </NavbarToggler> */}
+
+        {this.renderLogin()}
       </header>
     );
+  }
+
+  private async renderLogin() {
+    const userLoggedIn = isUserLoggedIn();
+
+    if (userLoggedIn) {
+      return (
+        <div className="ml-md-auto navbar-text">User is logged in!</div>
+      );
+    } else {
+      return (
+        <a className="navbar-nav">Log In</a>
+      );
+    }
   }
 
   // private sidebarToggle(e: React.MouseEvent<HTMLElement>) {
